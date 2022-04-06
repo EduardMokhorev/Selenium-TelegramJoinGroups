@@ -11,11 +11,16 @@ driver = webdriver.Chrome(executable_path="C:\\Users\\chromedriver.exe", chrome_
 wait = WebDriverWait(driver, 500)
 url = "https://web.telegram.org/"
 try:
-    urlDinamic = "https://web.telegram.org/z/#-1405303803"
-    driver.get(url=urlDinamic)
-    time.sleep(10)
-    driver.find_element(By.XPATH, '//*[@id="MiddleColumn"]/div[3]/div[1]/div[2]/div/button[1]/div').click()
-    time.sleep(3)
+    urlTelegram = "https://web.telegram.org/"
+    urlDinamic = "https://t.me/DeepWeb_Chatt"
+    driver.get(url=urlTelegram)
+    time.sleep(2)
+    driver.find_element(By.XPATH, '//*[@id="telegram-search-input"]').send_keys(urlDinamic)
+    time.sleep(2)
+    driver.find_element(By.XPATH, '//*[@id="telegram-search-input"]').send_keys(Keys.RETURN)
+    time.sleep(2)
+    driver.find_element(By.XPATH, '//*[text()="Join Group"]').click()
+    time.sleep(100)
 
 except Exception as ex:
     print(ex)
