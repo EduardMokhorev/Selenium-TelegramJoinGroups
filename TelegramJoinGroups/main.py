@@ -14,11 +14,13 @@ options.add_argument("user-data-dir=" + FILE_NAME_PROFILE)
 driver = webdriver.Chrome(executable_path="C:\\Users\\chromedriver.exe", chrome_options=options)
 wait = WebDriverWait(driver, 500)
 url = "https://web.telegram.org/"
+
 try:
-    sites = ["https://t.me/DarkProbiv", "https://t.me/RaychatDM", "https://t.me/city_blackkk", "https://t.me/opencardingchat", "https://t.me/CicadaHere", "https://t.me/RaychatDM", "https://t.me/carding_chatik", "https://t.me/probivclub", "https://t.me/freeesaucee", "https://t.me/freeesaucee", "https://t.me/hack_mom", "https://t.me/city_blackkk", "https://t.me/carding_chatik", "https://t.me/delovoy_sng", "https://t.me/hack_mom", "https://t.me/S_Y_P_E_R_S"]
+    sites = ["https://t.me/enter0_chat", "https://t.me/spammerdiscuss", "https://t.me/Rodina_Urodina", "https://t.me/badbclub", "https://t.me/CicadaHere", "https://t.me/hackeronechat", "https://t.me/darkfox_sng", "https://t.me/opencardingchathttps://t.me/lcarding", "https://t.me/darknet_ukraine", "https://t.me/city_blackkk", "https://t.me/big_project_chat", "https://t.me/google_ads_chat", "https://t.me/Casa_de_papeL", "https://t.me/spherechat", "https://t.me/monday_chat", "https://t.me/dark_rynok", "https://t.me/Brutal_Biz_man", "https://t.me/DarkProbiv", "https://t.me/carderteams_grouphttps://t.me/coolprices", "https://t.me/Yslugi_LOUIS_VUITTON", "https://t.me/mylibertychat", "https://t.me/blackjusticedarkmarket", "https://t.me/RaychatDM", "https://t.me/tovarkanemamont", "https://t.me/paranoia_cchat", "https://t.me/how2berich", "https://t.me/BlackWhiteNetwork", "https://t.me/ravenchatgen", "https://t.me/probivclub", "https://t.me/Blackinvestt", "https://t.me/blackmarket_chat", "https://t.me/Fack_The_Zakon", "https://t.me/carding_chatik", "https://t.me/DeepWeb_Chatt", "https://t.me/Escrow2iso", "https://t.me/freeesaucee", "https://t.me/E7Teamtrade", "https://t.me/hack_mom", "https://t.me/rec_chat", "https://t.me/delovoy_sng", "https://t.me/ZloyCpa", "https://t.me/S_Y_P_E_R_S"]
     pauseForCheckBan = 10
     pauseForAntiBan = random.randint(100, 200)
     pauseInBann = random.randint(600, 900)
+    url_Site = 0
 
     def check_exists_by_xpath(xpath):
         try:
@@ -39,7 +41,7 @@ try:
                     driver.find_element(By.XPATH, '//*[text()="Open in Web"]').click()
                     break
                 if j == 9:
-                    print('не найдена кнопка open in web')
+                    print('Наверно что-то с сылкой', url_Site)
 
         if check_exists_by_xpath('//*[text()="Join Group"]') == False and check_exists_by_xpath('//*[text()="Join Channel"]') == False:
             for j in range(10):
@@ -55,6 +57,7 @@ try:
                 time.sleep(pauseInBann)
             else:
                 print('We join to group', url_Site)
+                time.sleep(pauseForAntiBan)
 
         elif check_exists_by_xpath('//*[text()="Join Channel"]'):
             driver.find_element(By.XPATH, '//*[text()="Join Channel"]').click()
@@ -64,10 +67,11 @@ try:
                 time.sleep(pauseInBann)
             else:
                 print('We join to Channel', url_Site)
+                time.sleep(pauseForAntiBan)
 
         else:
             print("don't have button Join ", url_Site)
-    time.sleep(pauseForAntiBan)
+
 except Exception as ex:
     print(ex)
 finally:

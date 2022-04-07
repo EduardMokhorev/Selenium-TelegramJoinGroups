@@ -1,0 +1,12 @@
+https://allcalc.ru/node/1961
+удалить все переносы
+https://www.onlinegdb.com/online_python_compiler
+онлайн компилятор
+
+
+*каждое слово в кавычки и поставить после запятую
+print(*(f'"{x}",' for x in words))
+или
+print(*map(lambda x: f'"{x}",', words))
+
+
