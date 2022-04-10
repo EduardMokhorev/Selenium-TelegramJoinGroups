@@ -16,11 +16,11 @@ wait = WebDriverWait(driver, 500)
 url = "https://web.telegram.org/"
 
 try:
-    sites = ["https://t.me/monday_chat", "https://t.me/dark_rynok", "https://t.me/Brutal_Biz_man", "https://t.me/DarkProbiv", "https://t.me/carderteams_grouphttps://t.me/coolprices", "https://t.me/Yslugi_LOUIS_VUITTON", "https://t.me/mylibertychat", "https://t.me/blackjusticedarkmarket", "https://t.me/RaychatDM", "https://t.me/tovarkanemamont", "https://t.me/paranoia_cchat", "https://t.me/how2berich", "https://t.me/BlackWhiteNetwork", "https://t.me/ravenchatgen", "https://t.me/probivclub", "https://t.me/Blackinvestt", "https://t.me/blackmarket_chat", "https://t.me/Fack_The_Zakon", "https://t.me/carding_chatik", "https://t.me/DeepWeb_Chatt", "https://t.me/Escrow2iso", "https://t.me/freeesaucee", "https://t.me/E7Teamtrade", "https://t.me/hack_mom", "https://t.me/rec_chat", "https://t.me/delovoy_sng", "https://t.me/ZloyCpa", "https://t.me/S_Y_P_E_R_S"]
-    pauseForCheckBan = 10
-    pauseForAntiBan = 40
+    with open("sites.txt", "r") as file:
+        sites = file.read().split()
+    pauseForCheckBan = 3
+    pauseForAntiBan = 55
     pauseInBann = 500
-    url_Site = 0
     def check_exists_by_xpath(xpath):
         try:
             driver.find_element(By.XPATH, xpath)

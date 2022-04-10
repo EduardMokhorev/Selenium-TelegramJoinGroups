@@ -1,0 +1,8 @@
+username=
+Pc
+pauseForCheckBan= 
+3
+pauseForAntiBan= 
+55
+pauseInBann= 
+500
