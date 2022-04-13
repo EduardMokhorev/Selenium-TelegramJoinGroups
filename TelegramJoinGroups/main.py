@@ -8,19 +8,24 @@ from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import time
-FILE_NAME_PROFILE = r'C:\Users\pc\AppData\Local\Google\Chrome\User Data'
+
+with open("settings.txt", "r") as file:
+    settings = file.read().split()
+username = settings[1]
+pauseForCheckBan = int(settings[3])
+pauseForAntiBan = int(settings[5])
+pauseInBann = int(settings[7])
+wainingTimeElements = int(settings[9])
+FILE_NAME_PROFILE = fr'C:\Users\{username}\AppData\Local\Google\Chrome\User Data'
 options = webdriver.ChromeOptions()
 options.add_argument("user-data-dir=" + FILE_NAME_PROFILE)
-driver = webdriver.Chrome(executable_path="C:\\Users\\chromedriver.exe", chrome_options=options)
+driver = webdriver.Chrome(executable_path="driver\\chromedriver.exe", chrome_options=options)
 wait = WebDriverWait(driver, 500)
 url = "https://web.telegram.org/"
 
 try:
     with open("sites.txt", "r") as file:
         sites = file.read().split()
-    pauseForCheckBan = 3
-    pauseForAntiBan = 55
-    pauseInBann = 500
     def check_exists_by_xpath(xpath):
         try:
             driver.find_element(By.XPATH, xpath)
@@ -33,41 +38,53 @@ try:
         if check_exists_by_xpath('//*[text()="Open in Web"]'):
             driver.find_element(By.XPATH, '//*[text()="Open in Web"]').click()
         else:
-            for j in range(10):
+            for j in range(wainingTimeElements):
                 time.sleep(1)
                 if check_exists_by_xpath('//*[text()="Open in Web"]'):
                     driver.find_element(By.XPATH, '//*[text()="Open in Web"]').click()
                     break
-                if j == 9:
+                if j == (wainingTimeElements-1):
                     print('Наверно что-то с сылкой', url_Site)
 
         if check_exists_by_xpath('//*[text()="Join Group"]') == False and check_exists_by_xpath('//*[text()="Join Channel"]') == False:
-            for j in range(10):
+            for j in range(wainingTimeElements):
                 if check_exists_by_xpath('//*[text()="Join Group"]') is True or check_exists_by_xpath('//*[text()="Join Channel"]') is True:
                     break
                 time.sleep(1)
 
-
         if check_exists_by_xpath('//*[text()="Join Group"]'):
             driver.find_element(By.XPATH, '//*[text()="Join Group"]').click()
             time.sleep(pauseForCheckBan)
-            if check_exists_by_xpath('//*[text()="Join Group"]'):
-                print("we are in ban, waiting time =", pauseInBann)
+            count = 0
+            while check_exists_by_xpath('//*[text()="Join Group"]') and count < 20:
+                count += 1
+                print("we are in ban, waiting time second= ", pauseInBann, "try=", count)
                 time.sleep(pauseInBann)
+                if check_exists_by_xpath('//*[text()="Join Group"]'):
+                    driver.find_element(By.XPATH, '//*[text()="Join Group"]').click()
             else:
-                print('We join to group', url_Site)
-                time.sleep(pauseForAntiBan)
+                if count > 18:
+                    print('Count > 19, some error', url_Site)
+                else:
+                    print('We join to group', url_Site)
+                    time.sleep(pauseForAntiBan)
 
         elif check_exists_by_xpath('//*[text()="Join Channel"]'):
             driver.find_element(By.XPATH, '//*[text()="Join Channel"]').click()
             time.sleep(pauseForCheckBan)
-            if check_exists_by_xpath('//*[text()="Join Channel"]'):
-                print("We are in ban, waiting time =", pauseInBann)
+            count = 0
+            while check_exists_by_xpath('//*[text()="Join Channel"]' and count < 20):
+                count += 1
+                print("We are in ban, waiting time second=", pauseInBann, "try=", count)
                 time.sleep(pauseInBann)
+                if check_exists_by_xpath('//*[text()="Join Channel"]'):
+                    driver.find_element(By.XPATH, '//*[text()="Join Channel"]').click()
             else:
-                print('We join to Channel', url_Site)
-                time.sleep(pauseForAntiBan)
-
+                if count > 18:
+                    print('Count > 19, some error', url_Site)
+                else:
+                    print('We join to Channel', url_Site)
+                    time.sleep(pauseForAntiBan)
         else:
             print("don't have button Join ", url_Site)
 

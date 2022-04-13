@@ -1,8 +1,10 @@
 username=
-Pc
-pauseForCheckBan= 
-3
-pauseForAntiBan= 
-55
-pauseInBann= 
-500
+MyPc
+pauseForCheckBan(10-30)= 
+10
+pauseForAntiBan(45+)= 
+60
+pauseInBann(120+)= 
+120
+wainingTimeElements(10good)=
+10
