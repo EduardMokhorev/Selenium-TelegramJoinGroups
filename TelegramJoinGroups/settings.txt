@@ -1,10 +1,10 @@
 username=
 MyPc
 pauseForCheckBan(10-30)= 
-2
+10
 pauseForAntiBan(45+)= 
-2
+50
 pauseInBann(120+)= 
-2
+240
 wainingTimeElements(10good)=
-6
+10
