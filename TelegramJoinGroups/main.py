@@ -1,14 +1,13 @@
 import random
-from selenium.webdriver.common.alert import Alert
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import time
-
+with open("log.txt", "a") as log:
+    log.write("***********Новый запуск****************************************************************************\n"*3)
 with open("settings.txt", "r") as file:
     settings = file.read().split()
 username = settings[1]
@@ -45,6 +44,8 @@ try:
                     break
                 if j == (wainingTimeElements-1):
                     print('Наверно что-то с сылкой', url_Site)
+                    with open("log.txt", "a") as log:
+                        log.write(f"Наверно что-то с ссылкой {url_Site} \n")
 
         if check_exists_by_xpath('//*[text()="Join Group"]') == False and check_exists_by_xpath('//*[text()="Join Channel"]') == False:
             for j in range(wainingTimeElements):
@@ -59,14 +60,20 @@ try:
             while check_exists_by_xpath('//*[text()="Join Group"]') and count < 20:
                 count += 1
                 print("we are in ban, waiting time second= ", pauseInBann, "try=", count)
+                with open("log.txt", "a") as log:
+                    log.write(f"we are in ban, waiting time second=  {pauseInBann} try = {count} \n")
                 time.sleep(pauseInBann)
                 if check_exists_by_xpath('//*[text()="Join Group"]'):
                     driver.find_element(By.XPATH, '//*[text()="Join Group"]').click()
             else:
-                if count > 18:
-                    print('Count > 19, some error', url_Site)
+                if count > 19:
+                    print('Try > 19, some error', url_Site)
+                    with open("log.txt", "a") as log:
+                        log.write(f"Count > 19, some error=  {url_Site} \n")
                 else:
                     print('We join to group', url_Site)
+                    with open("log.txt", "a") as log:
+                        log.write(f"We join to Group =  {url_Site} \n")
                     time.sleep(pauseForAntiBan)
 
         elif check_exists_by_xpath('//*[text()="Join Channel"]'):
@@ -76,20 +83,30 @@ try:
             while check_exists_by_xpath('//*[text()="Join Channel"]' and count < 20):
                 count += 1
                 print("We are in ban, waiting time second=", pauseInBann, "try=", count)
+                with open("log.txt", "a") as log:
+                    log.write(f"we are in ban, waiting time second=  {pauseInBann} try = {count} \n")
                 time.sleep(pauseInBann)
                 if check_exists_by_xpath('//*[text()="Join Channel"]'):
                     driver.find_element(By.XPATH, '//*[text()="Join Channel"]').click()
             else:
-                if count > 18:
-                    print('Count > 19, some error', url_Site)
+                if count > 19:
+                    print('try > 19, some error', url_Site)
+                    with open("log.txt", "a") as log:
+                        log.write(f"Count > 19, some error=  {url_Site} \n")
                 else:
                     print('We join to Channel', url_Site)
+                    with open("log.txt", "a") as log:
+                        log.write(f"We join to Channel =  {url_Site} \n")
                     time.sleep(pauseForAntiBan)
         else:
             print("don't have button Join ", url_Site)
+            with open("log.txt", "a") as log:
+                log.write(f"don't have button Join =  {url_Site} \n")
 
 except Exception as ex:
     print(ex)
+    with open("log.txt", "a") as log:
+        log.write(f"{ex}\n")
 finally:
     driver.close()
     driver.quit()
